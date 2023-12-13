@@ -1,0 +1,119 @@
+﻿@page "/translate"
+@using System.ComponentModel.DataAnnotations
+@inject TranslationService TranslateService
+@using TranslateApp
+@using System.Text.Json
+...
+
+<h1>Translate Language</h1>
+
+<EditForm Model="TranslationInput" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="textToTranslate">Text to Translate:</label>
+        <InputTextArea id="textToTranslate" @bind-Value="TranslationInput.TextToTranslate" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="targetLanguage">Target Language:</label>
+        <InputSelect id="targetLanguage" @bind-Value="TranslationInput.TargetLanguage" class="form-control">
+            @foreach (var language in Languages)
+            {
+                <option value="@language.Code">@language.Name</option>
+            }
+        </InputSelect>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Translate</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(TranslatedText))
+{
+    <div class="alert alert-success mt-3" role="alert">
+        Translated Text: @TranslatedText
+    </div>
+}
+
+@code {
+
+    public class Language
+    {
+        public string Name { get; set; }
+        public string Code { get; set; }
+    }
+    private string TranslatedText { get; set; } = string.Empty;
+
+    private TranslationInputModel TranslationInput = new TranslationInputModel();
+
+    private List<Language> Languages = new List<Language>
+    {
+        new Language { Name = "English", Code = "en" },
+        new Language { Name = "Spanish", Code = "es" },
+        new Language { Name = "French", Code = "fr" },
+        new Language { Name = "German", Code = "de" },
+        new Language { Name = "Italian", Code = "it" },
+        new Language { Name = "Japanese", Code = "ja" },
+        new Language { Name = "Korean", Code = "ko" },
+        new Language { Name = "Portuguese", Code = "pt" },
+        new Language { Name = "Russian", Code = "ru" },
+        new Language { Name = "Chinese (Simplified)", Code = "zh-CN" },
+        new Language { Name = "Chinese (Traditional)", Code = "zh-TW" }
+
+        // Add more languages as needed
+    };
+}
+    @code {
+        // Existing properties and methods...
+
+        private void PrintTranslationResult()
+        {
+            Console.WriteLine($"Translated Text: {TranslatedText}");
+        }
+        }
+
+    @code {
+    private async Task HandleValidSubmit()
+    {
+        @inject TranslationService TranslationService
+
+        ...
+
+        @code {
+            // Existing code...
+
+            private async Task HandleValidSubmit()
+            {
+                var response = await TranslationService.TranslateTextAsync(TranslationInput);
+                
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    var translationResult = JsonSerializer.Deserialize<GoogleTranslateResponse>(responseContent);
+
+                    TranslatedText = translationResult.Data.Translations[0].TranslatedText;
+                }
+                else
+                {
+                    TranslatedText = "Error translating text.";
+                }
+            }
+        }
+
+        if (response.IsSuccessStatusCode)
+        {
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var translationResult = JsonSerializer.Deserialize<GoogleTranslateResponse>(responseContent);
+
+            TranslatedText = translationResult.Data.Translations[0].TranslatedText;
+        }
+        else
+        {
+            TranslatedText = "Error translating text.";
+        }
+    }
+    }
+     
+
+

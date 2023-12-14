@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ScknELgC5alFeZPLNZUl5PMwm2d1yi6CMx5vJ4xi3n1w7Kae6yVxIqMMYoEKm8jF8hyZOQDn9EtVwHA8x1DxDA==",
+  "dgSpecHash": "a+aEJV+ZLlV7xRmGHBNX/5F++bR70hj5uLiCHYQARFvm0CBFIbMmdACS3zPl/3dwBZ+PHwcMLdM1Nz24Zdh6gA==",
   "success": true,
   "projectFilePath": "C:\\Users\\gongy\\source\\repos\\TranslateApp\\TranslateApp.csproj",
   "expectedPackageFiles": [
@@ -31,6 +31,9 @@
     "C:\\Users\\gongy\\.nuget\\packages\\microsoft.net.illink.analyzers\\7.0.100-1.23211.1\\microsoft.net.illink.analyzers.7.0.100-1.23211.1.nupkg.sha512",
     "C:\\Users\\gongy\\.nuget\\packages\\microsoft.net.illink.tasks\\7.0.100-1.23211.1\\microsoft.net.illink.tasks.7.0.100-1.23211.1.nupkg.sha512",
     "C:\\Users\\gongy\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\8.0.0\\microsoft.net.sdk.webassembly.pack.8.0.0.nupkg.sha512",
+    "C:\\Users\\gongy\\.nuget\\packages\\microsoft.testplatform\\17.8.0\\microsoft.testplatform.17.8.0.nupkg.sha512",
+    "C:\\Users\\gongy\\.nuget\\packages\\mstest.testadapter\\3.1.1\\mstest.testadapter.3.1.1.nupkg.sha512",
+    "C:\\Users\\gongy\\.nuget\\packages\\mstest.testframework\\3.1.1\\mstest.testframework.3.1.1.nupkg.sha512",
     "C:\\Users\\gongy\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\gongy\\.nuget\\packages\\selenium.support\\4.16.2\\selenium.support.4.16.2.nupkg.sha512",
     "C:\\Users\\gongy\\.nuget\\packages\\selenium.webdriver\\4.16.2\\selenium.webdriver.4.16.2.nupkg.sha512",

@@ -3,6 +3,7 @@
 @inject TranslationService TranslateService
 @using TranslateApp
 @using System.Text.Json
+@inject HttpClient Http
 ...
 
 <h1>Translate Language</h1>
@@ -27,6 +28,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Translate</button>
+
 </EditForm>
 
 @if (!string.IsNullOrEmpty(TranslatedText))
@@ -40,8 +42,8 @@
 
     public class Language
     {
-        public string Name { get; set; }
-        public string Code { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Code { get; set; } = string.Empty;
     }
     private string TranslatedText { get; set; } = string.Empty;
 
@@ -61,59 +63,53 @@
         new Language { Name = "Chinese (Simplified)", Code = "zh-CN" },
         new Language { Name = "Chinese (Traditional)", Code = "zh-TW" }
 
-        // Add more languages as needed
     };
+
+
 }
-    @code {
-        // Existing properties and methods...
 
-        private void PrintTranslationResult()
-        {
-            Console.WriteLine($"Translated Text: {TranslatedText}");
-        }
-        }
 
-    @code {
+
+@code {
+
+
     private async Task HandleValidSubmit()
     {
-        @inject TranslationService TranslationService
 
-        ...
-
-        @code {
-            // Existing code...
-
-            private async Task HandleValidSubmit()
+        TranslationInputModel inputModel = new TranslationInputModel
             {
-                var response = await TranslationService.TranslateTextAsync(TranslationInput);
-                
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseContent = await response.Content.ReadAsStringAsync();
-                    var translationResult = JsonSerializer.Deserialize<GoogleTranslateResponse>(responseContent);
+                TextToTranslate = TranslationInput.TextToTranslate,
+                TargetLanguage = TranslationInput.TargetLanguage
+            };
 
-                    TranslatedText = translationResult.Data.Translations[0].TranslatedText;
-                }
-                else
-                {
-                    TranslatedText = "Error translating text.";
-                }
+        // Check if the input is valid
+        if (TranslationInput != null && !string.IsNullOrEmpty(TranslationInput.TextToTranslate) && !string.IsNullOrEmpty(TranslationInput.TargetLanguage))
+        {
+            try
+            {
+                // Call the translation service to translate the text
+                //  string translatedText = await TranslationService.TranslateTextAsync(inputModel);
+
+                // Call the translation service to translate the text
+                var translatedText = await TranslateService.TranslateTextAsync(inputModel);
+                // Update the translated text
+
+
+
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that occur during translation
+                // You can display an error message or log the exception
+                Console.WriteLine($"Translation error: {ex.Message}");
             }
         }
-
-        if (response.IsSuccessStatusCode)
-        {
-            var responseContent = await response.Content.ReadAsStringAsync();
-            var translationResult = JsonSerializer.Deserialize<GoogleTranslateResponse>(responseContent);
-
-            TranslatedText = translationResult.Data.Translations[0].TranslatedText;
-        }
-        else
-        {
-            TranslatedText = "Error translating text.";
-        }
     }
-    }
-     
+
+
+
+}
+
+
 
 

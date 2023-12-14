@@ -16,7 +16,15 @@ namespace TranslateApp
 
             builder.Services.AddScoped<TranslationService>();
 
-            await builder.Build().RunAsync();
+
+            builder.Services.AddScoped<GoogleTranslateResponse>();
+            builder.Services.AddScoped<TranslationInputModel>();
+            builder.Services.AddScoped<TranslationResult>();
+            builder.Services.AddScoped<Data>();
+            builder.Services.AddScoped<Translation>();
+
         }
+
+        
     }
 }
